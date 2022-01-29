@@ -8,14 +8,14 @@ let make = (~setColorScheme) => {
     )}>
     <TouchableOpacity
       style={Tw.style("flex-initial w-14 h-14 rounded-l-lg justify-center items-center ")}
-      onPress={_ => setColorScheme(_ => #light)}>
+      onPress={_ => setColorScheme(#light)}>
       <Text style={Tw.style("text-gray-800 dark:text-gray-900")}>
         <Expo.Icons.Feather name="sun" size={20} />
       </Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={Tw.style("flex-initial w-14 h-14 rounded-l-lg justify-center items-center ")}
-      onPress={_ => setColorScheme(_ => #dark)}>
+      onPress={_ => setColorScheme(#dark)}>
       <Text style={Tw.style("text-gray-400 dark:text-white")}>
         <Expo.Icons.Feather name="moon" size={20} />
       </Text>

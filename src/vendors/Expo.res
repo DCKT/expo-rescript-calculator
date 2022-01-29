@@ -17,3 +17,8 @@ module StatusBar = {
   @module("expo-status-bar") @react.component
   external make: (~style: string) => React.element = "StatusBar"
 }
+
+module AppLoading = {
+  @module("expo-app-loading") @react.component
+  external make: unit => React.element = "default"
+}

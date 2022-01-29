@@ -38,4 +38,4 @@ external useAppColorScheme: (
   twInstance,
   ~initialValue: colorScheme=?,
   unit,
-) => (colorScheme, unit => unit, (colorScheme => colorScheme) => unit) = "useAppColorScheme"
+) => (colorScheme, unit => unit, colorScheme => unit) = "useAppColorScheme"
