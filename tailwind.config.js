@@ -1,7 +1,11 @@
 module.exports = {
-  content: [],
+  content: ["./**/*.bs.js", "./App.js"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        test: "#1cbed2",
+      },
+    },
   },
   plugins: [],
-}
+};
