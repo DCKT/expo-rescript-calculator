@@ -145,12 +145,12 @@ let make = () => {
   if appReady {
     <ReactNativeSafeAreaContext.SafeAreaProvider>
       <View style={Tw.style("bg-white dark:bg-gray-800 flex-1")}>
-        <Expo.StatusBar style="auto" />
+        <Expo.StatusBar style={colorScheme === #light ? "dark" : "light"} animated=true />
         <DarkModeToggler setColorScheme />
         <CountDisplay result=state.result upperline={state.upperline} />
         <View
           style={Tw.style(
-            "flex-1 justify-center items-center bg-gray-50 dark:bg-gray-700 rounded-[40px]",
+            "flex-1 justify-center items-center bg-gray-100 dark:bg-gray-700 rounded-[40px]",
           )}>
           <View style={Tw.style("flex-initial flex-wrap flex-row  px-4 ")}>
             {keys

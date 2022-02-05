@@ -58,7 +58,7 @@ let make = (~value: t, ~onPress, ~isActive) => {
     onPress={_ => onPress()}
     style={Tw.styleArray([
       "flex-initial w-16 h-16 justify-center items-center rounded-xl m-3",
-      isActive ? "bg-gray-200 dark:bg-gray-400" : "bg-gray-100 dark:bg-gray-600",
+      isActive ? "bg-gray-300 dark:bg-gray-400" : "bg-gray-200 dark:bg-gray-600",
     ])}>
     <Text
       style={Tw.styleArray([

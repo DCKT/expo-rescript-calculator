@@ -15,7 +15,7 @@ module Icons = {
 
 module StatusBar = {
   @module("expo-status-bar") @react.component
-  external make: (~style: string) => React.element = "StatusBar"
+  external make: (~style: string, ~animated: bool=?) => React.element = "StatusBar"
 }
 
 module AppLoading = {
