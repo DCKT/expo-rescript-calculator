@@ -22,5 +22,3 @@ let toString: t => string
 
 @react.component
 let make: (~value: t, ~onPress: unit => unit, ~isActive: bool) => React.element
-
-let calculate: array<t> => float

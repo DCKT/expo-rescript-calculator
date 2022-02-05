@@ -61,6 +61,19 @@ let make = () => {
           result: concatenatedValue,
         }
       }
+    // | (ProcessKey(Number(n1)), Operation(Action(Period))) => {
+    //     let concatenatedValue = entriesTmp->Js.Array2.slice(-1) (n2->Float.toString ++ n1->Float.toString)->Js.Float.fromString
+    //     {
+    //       ...state,
+    //       currentInput: Number(concatenatedValue),
+    //       result: concatenatedValue,
+    //     }
+    //   }
+    // | (ProcessKey(Operation(Action(Period)) as input), Number(_)) => {
+    //     ...state,
+    //     entriesTmp: entriesTmp->Array.concat([currentInput]),
+    //     currentInput: input,
+    //   }
     | (ProcessKey(Operation(Calcul(_) as input)), Number(_)) => {
         ...state,
         entriesTmp: entriesTmp->Array.concat([currentInput]),
@@ -73,10 +86,14 @@ let make = () => {
         result: v1,
       }
     | (ProcessKey(Number(v1) as input), Operation(Calcul(_))) => {
-        ...state,
-        entriesTmp: entriesTmp->Array.concat([currentInput]),
-        currentInput: input,
-        result: v1,
+        let updatedEntries = entriesTmp->Array.concat([currentInput])
+
+        {
+          entriesTmp: updatedEntries,
+          upperline: updatedEntries->Array.map(Key.toString)->Js.Array2.joinWith(" "),
+          currentInput: input,
+          result: v1,
+        }
       }
     | (ProcessKey(Operation(Action(Equal)) as input), Number(value)) => {
         let updatedEntries = entriesTmp->Array.concat([Number(value)])
@@ -85,7 +102,7 @@ let make = () => {
           entriesTmp: updatedEntries,
           upperline: updatedEntries->Array.map(Key.toString)->Js.Array2.joinWith(" "),
           currentInput: input,
-          result: Key.calculate(updatedEntries),
+          result: Utils.calculate(updatedEntries),
         }
       }
     | _ => state

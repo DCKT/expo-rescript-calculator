@@ -1,4 +1,5 @@
 open Test
+open Utils
 
 let assertEqual = (~message, ~a, ~b) => assertion((a, b) => a === b, a, b, ~message)
 
@@ -199,9 +200,21 @@ test("Mix", () => {
       Operation(Calcul(Multiply)),
       Number(2.),
       Operation(Calcul(Divide)),
-      Number(3.),
+      Number(2.),
     ]),
-    ~b=2.,
+    ~b=3.,
+  )
+
+  assertEqual(
+    ~message="Should prior multiply",
+    ~a=calculate([
+      Number(1.),
+      Operation(Calcul(Add)),
+      Number(2.),
+      Operation(Calcul(Multiply)),
+      Number(2.),
+    ]),
+    ~b=5.,
   )
 })
 

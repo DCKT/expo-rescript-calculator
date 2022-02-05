@@ -58,7 +58,7 @@ let make = (~value: t, ~onPress, ~isActive) => {
     onPress={_ => onPress()}
     style={Tw.styleArray([
       "flex-initial w-16 h-16 justify-center items-center rounded-xl m-3",
-      isActive ? "bg-gray-200 dark:bg-gray-600" : "bg-gray-100 dark:bg-gray-600",
+      isActive ? "bg-gray-200 dark:bg-gray-400" : "bg-gray-100 dark:bg-gray-600",
     ])}>
     <Text
       style={Tw.styleArray([
@@ -80,39 +80,4 @@ let make = (~value: t, ~onPress, ~isActive) => {
       {value->toElement}
     </Text>
   </TouchableOpacity>
-}
-
-let calculate = (entries: array<t>) => {
-  let (_, total) = entries->Array.reduce((None, 0.), (acc, entry) => {
-    let (previous, total) = acc
-
-    switch (previous, entry) {
-    | (None, _) => (Some(entry), total)
-    | (Some(Number(_)), Number(_)) => acc
-    | (Some(Number(v)), Operation(_)) => (Some(entry), v)
-    | (Some(Operation(Calcul(operator))), Number(v)) => {
-        let newTotal = switch operator {
-        | Add => total +. v
-        | Substract => total -. v
-        | Multiply => total *. v
-        | Divide => total /. v
-        | Modulo => mod(total->Int.fromFloat, v->Int.fromFloat)->Float.fromInt
-        }
-        (Some(Number(newTotal)), newTotal)
-      }
-    | (Some(Operation(Action(action))), Number(v)) =>
-      switch action {
-      | Period => {
-          let concatenatedValue =
-            (total->Float.toString ++ "." ++ v->Float.toString)->Js.Float.fromString
-
-          (Some(Number(concatenatedValue)), concatenatedValue)
-        }
-      | _ => acc
-      }
-    | (Some(Operation(_)), Operation(_)) => acc
-    }
-  })
-
-  total
 }

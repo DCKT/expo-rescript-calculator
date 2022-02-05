@@ -4,7 +4,7 @@ open ReactNative
 let make = (~setColorScheme) => {
   <View
     style={Tw.style(
-      "flex-initial flex-row items-center bg-gray-200 dark:bg-gray-700 rounded-xl absolute top-20 z-10",
+      "flex-initial self-center flex-row items-center bg-gray-200 dark:bg-gray-700 rounded-xl absolute top-20 z-10",
     )}>
     <TouchableOpacity
       style={Tw.style("flex-initial w-14 h-14 rounded-l-lg justify-center items-center ")}
