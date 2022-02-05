@@ -143,32 +143,35 @@ let make = () => {
   })
 
   if appReady {
-    <View style={Tw.style("bg-white dark:bg-gray-800 flex-1")}>
-      <Expo.StatusBar style="auto" />
-      <DarkModeToggler setColorScheme />
-      <CountDisplay result=state.result upperline={state.upperline} />
-      <View
-        style={Tw.style(
-          "flex-1 flex-wrap flex-row bg-gray-50 dark:bg-gray-700 rounded-t-[40px] pt-10 px-4 justify-center items-center",
-        )}>
-        {keys
-        ->Array.map(value =>
-          <Key
-            key={value->Key.toString}
-            value
-            isActive={switch (value, state.currentInput) {
-            | (Operation(Calcul(op1)), Operation(Calcul(op2))) if op1 === op2 => true
-            | _ => false
-            }}
-            onPress={_ => {
-              dispatch(ProcessKey(value))
-              ()
-            }}
-          />
-        )
-        ->React.array}
+    <ReactNativeSafeAreaContext.SafeAreaProvider>
+      <View style={Tw.style("bg-white dark:bg-gray-800 flex-1")}>
+        <Expo.StatusBar style="auto" />
+        <DarkModeToggler setColorScheme />
+        <CountDisplay result=state.result upperline={state.upperline} />
+        <View
+          style={Tw.style(
+            "flex-1 justify-center items-center bg-gray-50 dark:bg-gray-700 rounded-[40px]",
+          )}>
+          <View style={Tw.style("flex-initial flex-wrap flex-row  px-4 ")}>
+            {keys
+            ->Array.map(value =>
+              <Key
+                key={value->Key.toString}
+                value
+                isActive={switch (value, state.currentInput) {
+                | (Operation(Calcul(op1)), Operation(Calcul(op2))) if op1 === op2 => true
+                | _ => false
+                }}
+                onPress={_ => {
+                  dispatch(ProcessKey(value))
+                }}
+              />
+            )
+            ->React.array}
+          </View>
+        </View>
       </View>
-    </View>
+    </ReactNativeSafeAreaContext.SafeAreaProvider>
   } else {
     <Expo.AppLoading />
   }

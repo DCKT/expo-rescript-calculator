@@ -38,15 +38,15 @@ let toString = (t: t) => {
 
 let toElement = (t: t) => {
   switch t {
-  | Operation(Calcul(Add)) => <Expo.Icons.FontAwesome5 name="plus" size={24} />
-  | Operation(Calcul(Divide)) => <Expo.Icons.FontAwesome5 name="divide" size={24} />
-  | Operation(Calcul(Multiply)) => <Expo.Icons.FontAwesome name="remove" size={24} />
-  | Operation(Calcul(Substract)) => <Expo.Icons.FontAwesome5 name="minus" size={24} />
-  | Operation(Action(Equal)) => <Expo.Icons.FontAwesome5 name="equals" size={24} />
+  | Operation(Calcul(Add)) => <Expo.Icons.FontAwesome5 name="plus" size={26} />
+  | Operation(Calcul(Divide)) => <Expo.Icons.FontAwesome5 name="divide" size={26} />
+  | Operation(Calcul(Multiply)) => <Expo.Icons.FontAwesome name="remove" size={26} />
+  | Operation(Calcul(Substract)) => <Expo.Icons.FontAwesome5 name="minus" size={26} />
+  | Operation(Action(Equal)) => <Expo.Icons.FontAwesome5 name="equals" size={26} />
   | Operation(Action(AC)) => "AC"->React.string
   | Operation(Action(PlusMine)) => "+/-"->React.string
-  | Operation(Calcul(Modulo)) => <Expo.Icons.FontAwesome5 name="percent" size={24} />
-  | Operation(Action(Undo)) => <Expo.Icons.FontAwesome5 name="undo" size={24} />
+  | Operation(Calcul(Modulo)) => <Expo.Icons.FontAwesome5 name="percent" size={26} />
+  | Operation(Action(Undo)) => <Expo.Icons.FontAwesome5 name="undo" size={26} />
   | Operation(Action(Period)) => "."->React.string
   | Number(n) => n->React.float
   }
@@ -71,10 +71,10 @@ let make = (~value: t, ~onPress, ~isActive) => {
         | Operation(Action(Equal)) => "text-red-400"
         | Operation(Action(AC))
         | Operation(Action(PlusMine))
-        | Operation(Calcul(Modulo)) => "text-2xl font-bold text-green-400"
+        | Operation(Calcul(Modulo)) => "text-3xl font-bold text-green-400"
         | Operation(Action(Undo))
         | Operation(Action(Period))
-        | Number(_) => "text-gray-800 dark:text-gray-200 text-2xl"
+        | Number(_) => "text-gray-800 dark:text-gray-200 text-3xl"
         },
       ])}>
       {value->toElement}
