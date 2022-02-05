@@ -1,20 +1,26 @@
 type rec t =
-  | Operation(operator)
-  | Number(int)
+  | Operation(operation)
+  | Number(float)
 
+and operation =
+  | Calcul(operator)
+  | Action(action)
 and operator =
   | Add
   | Substract
   | Multiply
   | Divide
+  | Modulo
+and action =
   | Equal
   | AC
   | PlusMine
-  | Modulo
   | Undo
   | Period
 
 let toString: t => string
 
 @react.component
-let make: (~value: t) => React.element
+let make: (~value: t, ~onPress: unit => unit, ~isActive: bool) => React.element
+
+let calculate: array<t> => float

@@ -8,10 +8,10 @@
     "rescript-react-native",
     "reason-promise"
   ],
-  "bs-dev-dependencies": [],
+  "bs-dev-dependencies": ["rescript-test"],
   "package-specs": [
     {
-      "module": "es6-global",
+      "module": "commonjs",
       "in-source": true
     }
   ],
@@ -19,6 +19,11 @@
     {
       "dir": "src",
       "subdirs": true
+    },
+    {
+      "dir": "tests",
+      "subdirs": true,
+      "type": "dev"
     }
   ],
   "suffix": ".bs.js",

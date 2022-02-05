@@ -1,2 +1,2 @@
 @react.component
-let make: unit => React.element
+let make: (~result: float, ~upperline: string) => React.element
