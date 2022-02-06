@@ -88,6 +88,11 @@ let make = () => {
         entriesTmp: entriesTmp->Array.concat([currentInput]),
         currentInput: input,
       }
+    | (ProcessKey(Operation(Action(PlusMine))), Number(v)) => {
+        ...state,
+        currentInput: Number(-.v),
+        result: -.state.result,
+      }
     | (ProcessKey(Operation(Calcul(_) as input)), Number(_)) => {
         ...state,
         entriesTmp: entriesTmp->Array.concat([currentInput]),
