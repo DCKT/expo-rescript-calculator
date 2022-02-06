@@ -61,19 +61,33 @@ let make = () => {
           result: concatenatedValue,
         }
       }
-    // | (ProcessKey(Number(n1)), Operation(Action(Period))) => {
-    //     let concatenatedValue = entriesTmp->Js.Array2.slice(-1) (n2->Float.toString ++ n1->Float.toString)->Js.Float.fromString
-    //     {
-    //       ...state,
-    //       currentInput: Number(concatenatedValue),
-    //       result: concatenatedValue,
-    //     }
-    //   }
-    // | (ProcessKey(Operation(Action(Period)) as input), Number(_)) => {
-    //     ...state,
-    //     entriesTmp: entriesTmp->Array.concat([currentInput]),
-    //     currentInput: input,
-    //   }
+    | (ProcessKey(Number(n1)), Operation(Action(Period))) => {
+        let concatenatedValue = {
+          let latestEntry = entriesTmp->Js.Array2.sliceFrom(-1)
+
+          switch latestEntry {
+          | [Number(v)] => {
+              let isAlreadyAFloat = v->Float.toString->Js.String2.includes(".")
+
+              isAlreadyAFloat
+                ? (v->Float.toString ++ n1->Float.toString)->Js.Float.fromString
+                : (v->Float.toString ++ "." ++ n1->Float.toString)->Js.Float.fromString
+            }
+          | _ => 0.
+          }
+        }
+        {
+          ...state,
+          entriesTmp: entriesTmp->Js.Array2.slice(~start=0, ~end_=entriesTmp->Array.length - 1),
+          currentInput: Number(concatenatedValue),
+          result: concatenatedValue,
+        }
+      }
+    | (ProcessKey(Operation(Action(Period)) as input), Number(_)) => {
+        ...state,
+        entriesTmp: entriesTmp->Array.concat([currentInput]),
+        currentInput: input,
+      }
     | (ProcessKey(Operation(Calcul(_) as input)), Number(_)) => {
         ...state,
         entriesTmp: entriesTmp->Array.concat([currentInput]),
@@ -102,7 +116,9 @@ let make = () => {
           entriesTmp: updatedEntries,
           upperline: updatedEntries->Array.map(Key.toString)->Js.Array2.joinWith(" "),
           currentInput: input,
-          result: Utils.calculate(updatedEntries),
+          result: Utils.calculate(updatedEntries)
+          ->Js.Float.toFixedWithPrecision(~digits=2)
+          ->Js.Float.fromString,
         }
       }
     | _ => state
