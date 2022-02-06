@@ -9,26 +9,25 @@ let keys = {
   open Key
 
   [
-    Operation(Action(AC)),
-    Operation(Action(PlusMine)),
-    Operation(Calcul(Modulo)),
-    Operation(Calcul(Divide)),
+    Action(AC),
+    Action(PlusMine),
+    Calcul(Modulo),
+    Calcul(Divide),
     Number(7.),
     Number(8.),
     Number(9.),
-    Operation(Calcul(Multiply)),
+    Calcul(Multiply),
     Number(4.),
     Number(5.),
     Number(6.),
-    Operation(Calcul(Substract)),
+    Calcul(Substract),
     Number(1.),
     Number(2.),
     Number(3.),
-    Operation(Calcul(Add)),
-    Operation(Action(Undo)),
+    Calcul(Add),
     Number(0.),
-    Operation(Action(Period)),
-    Operation(Action(Equal)),
+    Action(Period),
+    Action(Equal),
   ]
 }
 
@@ -51,7 +50,7 @@ let make = () => {
     let {currentInput, entriesTmp} = state
 
     switch (action, currentInput) {
-    | (ProcessKey(Operation(Action(AC))), _) => initialState
+    | (ProcessKey(Action(AC)), _) => initialState
     | (ProcessKey(Number(n1)), Number(n2)) => {
         let concatenatedValue =
           n2 === 0. ? n1 : (n2->Float.toString ++ n1->Float.toString)->Js.Float.fromString
@@ -61,7 +60,7 @@ let make = () => {
           result: concatenatedValue,
         }
       }
-    | (ProcessKey(Number(n1)), Operation(Action(Period))) => {
+    | (ProcessKey(Number(n1)), Action(Period)) => {
         let concatenatedValue = {
           let latestEntry = entriesTmp->Js.Array2.sliceFrom(-1)
 
@@ -83,28 +82,28 @@ let make = () => {
           result: concatenatedValue,
         }
       }
-    | (ProcessKey(Operation(Action(Period)) as input), Number(_)) => {
+    | (ProcessKey(Action(Period) as input), Number(_)) => {
         ...state,
         entriesTmp: entriesTmp->Array.concat([currentInput]),
         currentInput: input,
       }
-    | (ProcessKey(Operation(Action(PlusMine))), Number(v)) => {
+    | (ProcessKey(Action(PlusMine)), Number(v)) => {
         ...state,
         currentInput: Number(-.v),
         result: -.state.result,
       }
-    | (ProcessKey(Operation(Calcul(_) as input)), Number(_)) => {
+    | (ProcessKey(Calcul(_) as input), Number(_)) => {
         ...state,
         entriesTmp: entriesTmp->Array.concat([currentInput]),
-        currentInput: Operation(input),
+        currentInput: input,
       }
-    | (ProcessKey(Number(v1) as input), Operation(Action(Equal))) => {
+    | (ProcessKey(Number(v1) as input), Action(Equal)) => {
         entriesTmp: [],
         upperline: "",
         currentInput: input,
         result: v1,
       }
-    | (ProcessKey(Number(v1) as input), Operation(Calcul(_))) => {
+    | (ProcessKey(Number(v1) as input), Calcul(_)) => {
         let updatedEntries = entriesTmp->Array.concat([currentInput])
 
         {
@@ -114,7 +113,7 @@ let make = () => {
           result: v1,
         }
       }
-    | (ProcessKey(Operation(Action(Equal)) as input), Number(value)) => {
+    | (ProcessKey(Action(Equal) as input), Number(value)) => {
         let updatedEntries = entriesTmp->Array.concat([Number(value)])
 
         {
@@ -180,7 +179,7 @@ let make = () => {
                 key={value->Key.toString}
                 value
                 isActive={switch (value, state.currentInput) {
-                | (Operation(Calcul(op1)), Operation(Calcul(op2))) if op1 === op2 => true
+                | (Calcul(op1), Calcul(op2)) if op1 === op2 => true
                 | _ => false
                 }}
                 onPress={_ => {

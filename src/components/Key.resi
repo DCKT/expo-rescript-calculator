@@ -1,10 +1,8 @@
 type rec t =
-  | Operation(operation)
-  | Number(float)
-
-and operation =
   | Calcul(operator)
   | Action(action)
+  | Number(float)
+
 and operator =
   | Add
   | Substract
@@ -15,7 +13,6 @@ and action =
   | Equal
   | AC
   | PlusMine
-  | Undo
   | Period
 
 let toString: t => string
