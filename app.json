@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Calculator",
-    "slug": "Calculator",
+    "name": "Expo ReScript Calculator",
+    "slug": "expo-rescript-calculator",
     "userInterfaceStyle": "automatic",
     "version": "1.0.0",
     "orientation": "portrait",

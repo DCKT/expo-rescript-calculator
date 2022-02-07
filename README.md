@@ -1,15 +1,29 @@
-# expo-rescript-template
+# expo-rescript-calculator
 
-Expo template to build mobile application with ReScript.
+Calculator app written with [Expo](https://expo.dev) and [ReScript](https://rescript-lang.org)
 
-## Usage
+## Try it 📱
+
+You can try this app through [Expo Go](https://expo.dev/expo-go)
+
+## Development
+
+Install dependencies
 
 ```bash
-expo init MyApp --template expo-rescript-template
+yarn
+# or
+npm install
 ```
 
-## Things to customize
+Then build the ReScript files
 
-- [ ] `app.json` name, slug
-- [ ] `package.json` name
-- [ ] `bsconfig.json` name
+```bash
+yarn rescript:watch
+```
+
+In another terminal, run the expo server
+
+```bash
+yarn start
+```
