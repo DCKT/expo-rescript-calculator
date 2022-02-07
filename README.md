@@ -2,9 +2,13 @@
 
 Calculator app written with [Expo](https://expo.dev) and [ReScript](https://rescript-lang.org)
 
+## Design
+
+I took [the design](https://dribbble.com/shots/14709020-Calculator) from Dribbble from [Lucia Scott](https://dribbble.com/luciascott).
+
 ## Try it 📱
 
-You can try this app through [Expo Go](https://expo.dev/expo-go)
+You can try this app through [Expo Go](https://expo.dev/expo-go) following [this link](https://expo.dev/@dckthomas/expo-rescript-calculator).
 
 ## Development
 
