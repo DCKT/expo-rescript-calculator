@@ -1,5 +1,8 @@
 # expo-rescript-calculator
 
+
+<img src="https://github.com/DCKT/expo-rescript-calculator/blob/main/assets/icon.png?raw=true" width="220" />
+
 Calculator app written with [Expo](https://expo.dev) and [ReScript](https://rescript-lang.org)
 
 ## Design
